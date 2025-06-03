@@ -1,0 +1,40 @@
+name: Data Preprocessing Workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 0 * * *" # Jalankan setiap hari pada pukul 00:00 UTC
+
+jobs:
+  preprocessing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12.6"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pandas scikit-learn nltk python-dotenv wordcloud mlflow dagshub
+
+      - name: Run python automate script
+        run: python preprocessing/automate_margareta-lola-lali-lulita.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "margaretalolalilulita@gmail.com"
+          git config --local user.name "margaretalola" 
+          git add preprocessing/preprocessed_data.csv
+          git commit -m "Automated Data Preprocessing"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
