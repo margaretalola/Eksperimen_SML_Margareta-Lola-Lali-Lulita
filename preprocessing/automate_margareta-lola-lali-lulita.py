@@ -50,7 +50,7 @@ def fill_missing_rating(df):
 def clean_text(text):
     """Membersihkan teks dari karakter non-huruf dan stopwords."""
     try:
-        text = re.sub(r'[^a-zA-Z]', ' ', str(text))  # Pastikan input adalah string
+        text = re.sub(r'[^a-zA-Z]', ' ', str(text)) 
         text = text.lower()
         text = text.split()
         lemmatizer = WordNetLemmatizer()
