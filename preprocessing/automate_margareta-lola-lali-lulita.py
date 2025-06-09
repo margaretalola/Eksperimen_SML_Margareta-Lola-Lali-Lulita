@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder
 import nltk
 import mlflow
-
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
